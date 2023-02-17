@@ -9,6 +9,6 @@ def index(request):
     template = loader.get_template("main/index.html")
     test = "mefaitplaisir"
     context = {
-        'test1': test
+        'test': test
     }
     return HttpResponse(template.render(context))
