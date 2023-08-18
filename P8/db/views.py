@@ -41,10 +41,12 @@ def user_login(request):
     return render(request,"user/user_login.html",context)
 
 def search_product(request):
-    if request.method == "POST":
-        query_name = request.POST.get('search_product', None)
+    if request.method == "GET":
+        query_name = request.GET.get('search_product', None)
+        print(query_name)
         if query_name:
             results = Product.objects.filter(name__contains=query_name)
+            print(results)
             return render(request, 'product/search_product.html', {"results":results})
 
     return render(request, 'product/search_product.html')

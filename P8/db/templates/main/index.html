@@ -45,9 +45,8 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours</p>
-                        <form action="{% url 'search_product' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="text" placeholder="Produit.." name="search">
+                        <form action="{% url 'search_product' %}" method="GET">
+                            <input type="text" placeholder="Produit.." name="search_product">
                             <button type="submit">Chercher</button>
                         </form>
                     </div>
