@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>Creative - Start Bootstrap Theme</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.icon" />
         <!-- Bootstrap Icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Google fonts-->
@@ -45,7 +45,8 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours</p>
-                        <form action="/action_page.php">
+                        <form action="{% url 'search_product' %}" method="POST">
+                            {% csrf_token %}
                             <input type="text" placeholder="Produit.." name="search">
                             <button type="submit">Chercher</button>
                         </form>

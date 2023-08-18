@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import UserRegisterForm, UserLoginForm
-from .models import User
+from .models import User, Product
+
 import requests
 
 # Create your views here.
@@ -39,6 +40,11 @@ def user_login(request):
                 return response
     return render(request,"user/user_login.html",context)
 
-def product_search(request):
+def search_product(request):
     if request.method == "POST":
-        url = "https://fr.openfoodfacts.org/data"
+        query_name = request.POST.get('search_product', None)
+        if query_name:
+            results = Product.objects.filter(name__contains=query_name)
+            return render(request, 'product/search_product.html', {"results":results})
+
+    return render(request, 'product/search_product.html')
