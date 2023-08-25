@@ -8,8 +8,9 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=80)
     nutriscore = models.CharField(max_length=1)
-    id_category = models.ForeignKey(Category, on_delete=models.CASCADE, default=0
-                                    )
+    image_url = models.CharField(max_length=200, default='')
+    id_category = models.ForeignKey(Category, on_delete=models.CASCADE, default=0)
+
 
 
 class User(models.Model):
@@ -18,6 +19,7 @@ class User(models.Model):
     firstname = models.CharField(max_length=20, default='')
 
     """Vérifier best practice Django vis à vis des mdp"""
+
 
 class Bookmark(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE)

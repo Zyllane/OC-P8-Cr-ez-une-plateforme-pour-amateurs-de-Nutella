@@ -23,5 +23,6 @@ class Command(BaseCommand):
                     product.name = p.get('name')
                     product.id_category = category
                     product.nutriscore = p.get('nutriscore')
+                    product.image_url = p.get('image')
                     product.save()
 

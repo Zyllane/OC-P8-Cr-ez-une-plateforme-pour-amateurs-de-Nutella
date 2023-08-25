@@ -1,14 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Product</title>
-</head>
-<body>
-{% for result in results %}
-
-    <p>{{result.name}}</p>
-
-{% endfor %}
-</body>
-</html>
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="search_products">
+    <div class="first_product">
+        <img
+            class="first_product_image"
+            src={{results.0.image_url}}
+        />
+        {{results.0.name}}
+    </div>
+    <div class="container">
+        {% for result in results %}
+            {% if not forloop.first %}
+                <div class="card" style="width: 30%; height: 400px;">
+                    <img
+                        class="card-img-top" style="width: 233px; height: 200px;"
+                        src={{result.image_url}}>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ result.name }}</h4>
+                        <p class="card-text">Nutriscore: {{ result.nutriscore }}</p>
+                        <a href="#" class="btn btn-primary stretched-link">Sauvegarde</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

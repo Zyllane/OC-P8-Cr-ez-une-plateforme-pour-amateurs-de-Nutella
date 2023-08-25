@@ -18,7 +18,8 @@ def get_products_by_category(category):
     results = []
     products = data.get("products")[:6]
     for product in products:
-        p = {'nutriscore':product.get("nutriscore_grade","e"), 'name':product.get("product_name","produit indisponible")}
+        p = {'nutriscore':product.get("nutriscore_grade","e"), 'name':product.get("product_name","produit indisponible"),
+             'image':product.get("image_url","")}
         results.append(p)
     return results
 
