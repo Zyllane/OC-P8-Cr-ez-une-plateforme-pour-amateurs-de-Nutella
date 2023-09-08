@@ -6,7 +6,9 @@
             class="first_product_image"
             src={{results.0.image_url}}
         />
-        {{results.0.name}}
+        <div class="text-center-first-product">
+            {{results.0.name}}
+        </div>
     </div>
     <div class="container">
         {% for result in results %}
@@ -18,7 +20,8 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ result.name }}</h4>
                         <p class="card-text">Nutriscore: {{ result.nutriscore }}</p>
-                        <a href="#" class="btn btn-primary stretched-link">Sauvegarde</a>
+                        <button type="button" class="btn btn-warning"><i class="fa fa-floppy-o" aria-hidden="true">
+                            </i> Sauvegarder</button>
                     </div>
                 </div>
             {% endif %}

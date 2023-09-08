@@ -11465,7 +11465,18 @@ header.masthead h1, header.masthead .h1 {
 }
 
 .first_product{
+  position: relative;
   text-align: center;
+  color: white;
+  font-weight: bold;
+  background-color: black;
+}
+
+.text-center-first-product{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .container{
@@ -11475,4 +11486,7 @@ header.masthead h1, header.masthead .h1 {
   margin-top: 20px;
   margin-bottom: 20px;
   flex-wrap: wrap;
+
+
+
 }
