@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import UserRegisterForm, UserLoginForm
-from .models import User, Product
+from .models import User, Product, Bookmark
 
 import requests
 
@@ -10,12 +10,8 @@ from django.template import loader
 
 
 def index(request):
-    template = loader.get_template("main/index.html")
-    test = "mefaitplaisir"
-    context = {
-        'test': test
-    }
-    return HttpResponse(template.render(context))
+    response = render(request, "main/index.html")
+    return response
 
 def user_register(request):
     form = UserRegisterForm()
@@ -32,21 +28,27 @@ def user_login(request):
     if request.method == "POST":
         form = UserLoginForm(request.POST)
         if form.is_valid():
-            user_exist = User.objects.filter(mail=request.POST['mail'], password=request.POST['password']).exists()
+            queryset = User.objects.filter(mail=request.POST['mail'], password=request.POST['password'])
+            user_exist = queryset.exists()
             if user_exist:
+                user = queryset.get()
                 response = render(request, "main/index.html", context)
                 response.set_cookie("mail", request.POST["mail"])
-                response.set_cookie("login", True)
+                response.set_cookie("login", "True")
+                response.set_cookie("id_user", user.id)
                 return response
     return render(request,"user/user_login.html",context)
 
 def search_product(request):
-    if request.method == "GET":
-        query_name = request.GET.get('search_product', None)
-        print(query_name)
-        if query_name:
-            results = Product.objects.filter(name__contains=query_name)
-            print(results)
-            return render(request, 'product/search_product.html', {"results":results})
+    query_name = request.GET.get('search_product', None)
+    if query_name:
+        results = Product.objects.filter(name__contains=query_name)
+        context = {"results":results, "login":request.COOKIES.get("login")}
 
-    return render(request, 'product/search_product.html')
+    if request.method == "POST":
+        bookmark = Bookmark()
+        bookmark.id_product = Product.objects.get(pk=request.POST["id"])
+        bookmark.id_user = User.objects.get(pk=request.COOKIES.get("id_user"))
+        bookmark.save()
+
+    return render(request, 'product/search_product.html', context)

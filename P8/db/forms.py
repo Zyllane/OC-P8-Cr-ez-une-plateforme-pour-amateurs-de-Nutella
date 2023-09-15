@@ -1,12 +1,14 @@
-from django.forms import ModelForm
-from .models import User
+from django import forms
+from .models import User, Bookmark
 
-class UserRegisterForm(ModelForm):
+class UserRegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = '__all__'
 
-class UserLoginForm(ModelForm):
+class UserLoginForm(forms.ModelForm):
     class Meta:
         model = User
         exclude = ('firstname',)
+
+
